@@ -87,7 +87,7 @@ justify-center p-4">
 rounded-3xl p-6 shadow-2xl">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold">Meme Annotation</h1>
+            <h1 className="text-2xl font-bold">Reel Annotation</h1>
             <p className="text-sm text-slate-400 mt-1">
               Collaborative Review Platform
             </p>
