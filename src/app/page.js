@@ -3,6 +3,18 @@
 import { useEffect, useState } from "react";
 import reels from "./reels";
 import toast, { Toaster } from "react-hot-toast";
+// import { InstagramEmbed } from "react-social-media-embed";
+import dynamic from "next/dynamic";
+
+const InstagramEmbed = dynamic(
+  () =>
+    import("react-social-media-embed").then(
+      (mod) => mod.InstagramEmbed
+    ),
+  {
+    ssr: false,
+  }
+);
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -107,14 +119,24 @@ border-[#334155]">
 rounded-2xl px-4 py-3 text-white outline-none focus:border-[#5B8CFF]
 transition-all"
           />
-          <a
+          {/* <a
             href={currentReel.url}
             target="_blank"
             className="w-full block text-center bg-[#5B8CFF] hover:bg-
 [#4A7AF0] transition-all rounded-2xl py-4 font-semibold"
           >
             Watch Instagram Reel
-          </a>
+          </a> */}
+          <div className="bg-[#1E293B] border border-[#334155] rounded-3xl overflow-hidden">
+            <div className="h-[450px] md:h-[520px] overflow-y-auto flex justify-center">
+              <InstagramEmbed
+                key={currentReel.id}
+                url={currentReel.url}
+                width={"100%"}
+                captioned={false}
+              />
+            </div>
+          </div>
           <select
             value={primaryLabel}
             onChange={(e) => setPrimaryLabel(e.target.value)}
@@ -180,17 +202,26 @@ disabled:opacity-50 transition-all rounded-2xl py-4 font-semibold"
           </button>
           <div className="flex gap-4">
             <button
-              onClick={() =>
-                setCurrentIndex((prev) => Math.max(prev - 1, 0))
-              }
-              className="flex-1 bg-[#1E293B] hover:bg-[#273449] transitionall rounded-2xl py-3 border border-[#334155]"
+              onClick={() => {
+                resetForm();
+
+                setCurrentIndex((prev) =>
+                  Math.max(prev - 1, 0)
+                );
+              }}
+              className="flex-1 bg-[#1E293B] hover:bg-[#273449] transition-all rounded-2xl py-3 border border-[#334155]"
             >
               Previous
             </button>
             <button
+              onClick={() => {
+                resetForm();
 
-              onClick={moveNext}
-              className="flex-1 bg-[#1E293B] hover:bg-[#273449] transitionall rounded-2xl py-3 border border-[#334155]"
+                setCurrentIndex((prev) =>
+                  Math.min(prev + 1, reels.length - 1)
+                );
+              }}
+              className="flex-1 bg-[#1E293B] hover:bg-[#273449] transition-all rounded-2xl py-3 border border-[#334155]"
             >
               Next
             </button>
