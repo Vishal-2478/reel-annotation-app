@@ -76,7 +76,7 @@ export default function Home() {
         hateType,
         severity,
       };
-      await fetch("https://script.google.com/macros/s/AKfycbxM_2msl7bHFgKC8crVIYe9ouwsuK9bR4h9JuctSWgTgLtOiTVb6bgd68MSyXzglL9aNA/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbw5KQNxfMnxYpmESKm7PUVDujtldfgIC1pKFR5LXGtLRITV5t0RLvFon-CqwYJmc1RxtA/exec", {
         method: "POST",
         body: JSON.stringify(payload),
       });
