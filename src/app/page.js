@@ -23,6 +23,7 @@ export default function Home() {
   const [hateCategory, setHateCategory] = useState("");
   const [hateType, setHateType] = useState("");
   const [severity, setSeverity] = useState("");
+  const [jumpIndex, setJumpIndex] = useState("");
 
   const [loading, setLoading] = useState(false);
   const currentReel = reels[currentIndex];
@@ -109,6 +110,46 @@ border-[#334155]">
             {currentIndex + 1} / {reels.length}
           </div>
         </div>
+        <div className="flex gap-2">
+          <input
+            type="number"
+            placeholder="Go to reel #"
+            value={jumpIndex}
+            onChange={(e) => setJumpIndex(e.target.value)}
+            className="flex-1 bg-[#1E293B] border border-[#334155] rounded-2xl px-4 py-3 text-white outline-none focus:border-[#5B8CFF]"
+          />
+
+          <button
+            onClick={() => {
+              const index = Number(jumpIndex) - 1;
+
+              if (index >= 0 && index < reels.length) {
+                resetForm();
+                setCurrentIndex(index);
+                setJumpIndex("");
+              } else {
+                alert("Invalid reel number");
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const index = Number(jumpIndex) - 1;
+
+                if (index >= 0 && index < reels.length) {
+                  resetForm();
+                  setCurrentIndex(index);
+                  setJumpIndex("");
+                } else {
+                  alert("Invalid reel number");
+                }
+              }
+            }}
+            className="bg-[#5B8CFF] hover:bg-[#4A7AF0] px-4 rounded-2xl font-semibold"
+          >
+            Go
+          </button>
+        </div>
+        <br />
         <div className="space-y-4">
           <input
             type="text"
